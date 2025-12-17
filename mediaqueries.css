@@ -1,0 +1,516 @@
+                /* ============================================
+                   MEDIA QUERIES - RESPONSIVE DESIGN STYLES
+                   ============================================ */
+
+                /*
+                  File Structure:
+                  1. Large Devices (Laptops/Desktops)
+                  2. Medium Devices (Tablets)
+                  3. Small Devices (Large Phones)
+                  4. Extra Small Devices (Phones)
+                  5. Very Small Devices (Small Phones)
+                  6. Print Styles
+                  7. High-DPI Screens
+                  8. Dark Mode Support
+                  9. Reduced Motion Support
+                */
+
+
+                /* ============================================
+                   1. LARGE DEVICES (Laptops/Desktops: 1200px and below)
+                   ============================================ */
+
+                @media screen and (max-width: 1200px) {
+                    /* 
+                      For screens smaller than 1200px (smaller laptops, large tablets in landscape)
+                      These adjustments help content fit better on medium-sized screens
+                    */
+
+                    /* Reduce hero title size for better proportion */
+                    .hero-title {
+                        font-size: 3rem;
+                    }
+
+                    /* Adjust profile image container size */
+                    .image-container {
+                        width: 350px;
+                        height: 350px;
+                    }
+
+                    /* Reduce spacing between experience sections */
+                    .experience-grid {
+                        gap: 2rem;
+                    }
+                }
+
+
+                /* ============================================
+                   2. MEDIUM DEVICES (Tablets: 992px and below)
+                   ============================================ */
+
+                @media screen and (max-width: 992px) {
+                    /*
+                      For tablets and small laptops (768px - 992px)
+                      Major layout changes: switching from side-by-side to stacked content
+                    */
+
+                    /* Increase container padding for better touch targets on tablets */
+                    .container {
+                        padding: 0 30px;
+                    }
+
+                    /* --- NAVIGATION --- */
+                    /* Hide desktop navigation, show hamburger menu */
+                    #desktop-nav {
+                        display: none;
+                    }
+
+                    #hamburger-nav {
+                        display: flex;
+                    }
+                    /* --- END NAVIGATION --- */
+
+
+                    /* --- HERO SECTION --- */
+                    /* Stack hero content vertically (image below text) */
+                    .hero-content {
+                        grid-template-columns: 1fr;
+                        text-align: center;
+                        gap: 3rem;
+                    }
+
+                    /* Center hero description */
+                    .hero-description {
+                        margin: 0 auto 2rem;
+                    }
+
+                    /* Center buttons and social links */
+                    .btn-container {
+                        justify-content: center;
+                    }
+
+                    .social-links {
+                        justify-content: center;
+                    }
+                    /* --- END HERO SECTION --- */
+
+
+                    /* --- ABOUT SECTION --- */
+                    /* Stack about content vertically */
+                    .about-content {
+                        grid-template-columns: 1fr;
+                        gap: 3rem;
+                    }
+                    /* --- END ABOUT SECTION --- */
+
+
+                    /* --- EXPERIENCE SECTION --- */
+                    /* Stack skill categories vertically */
+                    .experience-grid {
+                        grid-template-columns: 1fr;
+                        max-width: 600px;
+                        margin: 0 auto;
+                    }
+                    /* --- END EXPERIENCE SECTION --- */
+
+
+                    /* --- PROJECTS SECTION --- */
+                    /* Adjust project grid for better tablet display */
+                    .projects-grid {
+                        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                    }
+                    /* --- END PROJECTS SECTION --- */
+
+
+                    /* --- CONTACT SECTION --- */
+                    /* Stack contact form below contact info */
+                    .contact-content {
+                        grid-template-columns: 1fr;
+                        gap: 3rem;
+                        max-width: 600px;
+                        margin: 0 auto;
+                    }
+                    /* --- END CONTACT SECTION --- */
+
+
+                    /* --- FOOTER --- */
+                    /* Adjust footer layout for tablet */
+                    .footer-content {
+                        grid-template-columns: repeat(2, 1fr);
+                    }
+
+                    /* Make logo span full width */
+                    .footer-logo {
+                        grid-column: 1 / -1;
+                        text-align: center;
+                    }
+                    /* --- END FOOTER --- */
+                }
+
+
+                /* ============================================
+                   3. SMALL DEVICES (Large Phones: 768px and below)
+                   ============================================ */
+
+                @media screen and (max-width: 768px) {
+                    /*
+                      For large smartphones (576px - 768px)
+                      Further adjustments for better mobile experience
+                    */
+
+                    /* --- TYPOGRAPHY --- */
+                    /* Reduce font sizes for better readability on mobile */
+                    .hero-title {
+                        font-size: 2.5rem;
+                    }
+
+                    .section-title {
+                        font-size: 2rem;
+                    }
+                    /* --- END TYPOGRAPHY --- */
+
+
+                    /* --- HERO SECTION --- */
+                    /* Further reduce profile image size */
+                    .image-container {
+                        width: 300px;
+                        height: 300px;
+                    }
+
+                    /* Stack buttons vertically on mobile */
+                    .btn-container {
+                        flex-direction: column;
+                        align-items: center;
+                    }
+
+                    /* Make buttons full-width on mobile */
+                    .btn {
+                        width: 100%;
+                        max-width: 250px;
+                    }
+                    /* --- END HERO SECTION --- */
+
+
+                    /* --- ABOUT SECTION --- */
+                    /* Stack stats vertically on mobile */
+                    .stats-container {
+                        grid-template-columns: 1fr;
+                    }
+                    /* --- END ABOUT SECTION --- */
+
+
+                    /* --- PROJECTS SECTION --- */
+                    /* Single column for projects on mobile */
+                    .projects-grid {
+                        grid-template-columns: 1fr;
+                    }
+                    /* --- END PROJECTS SECTION --- */
+
+
+                    /* --- FOOTER --- */
+                    /* Single column footer on mobile */
+                    .footer-content {
+                        grid-template-columns: 1fr;
+                        text-align: center;
+                    }
+
+                    /* Center social icons */
+                    .social-icons {
+                        justify-content: center;
+                    }
+                    /* --- END FOOTER --- */
+                }
+
+
+                /* ============================================
+                   4. EXTRA SMALL DEVICES (Phones: 576px and below)
+                   ============================================ */
+
+                @media screen and (max-width: 576px) {
+                    /*
+                      For standard smartphones (375px - 576px)
+                      Critical adjustments for small screen usability
+                    */
+
+                    /* --- NAVIGATION --- */
+                    /* Reduce navigation padding on very small screens */
+                    #hamburger-nav {
+                        padding: 1rem;
+                    }
+                    /* --- END NAVIGATION --- */
+
+
+                    /* --- HERO SECTION --- */
+                    /* Adjust top padding for fixed header */
+                    .hero-section {
+                        padding-top: 70px;
+                    }
+
+                    /* Further reduce hero text sizes */
+                    .hero-title {
+                        font-size: 2rem;
+                    }
+
+                    .hero-subtitle {
+                        font-size: 1.2rem;
+                    }
+
+                    /* Smaller profile image for very small screens */
+                    .image-container {
+                        width: 250px;
+                        height: 250px;
+                    }
+                    /* --- END HERO SECTION --- */
+
+
+                    /* --- SECTIONS COMMON STYLES --- */
+                    /* Reduce section padding on mobile */
+                    section {
+                        padding: 60px 0;
+                    }
+
+                    /* Smaller section titles */
+                    .section-title {
+                        font-size: 1.8rem;
+                    }
+                    /* --- END SECTIONS COMMON STYLES --- */
+
+
+                    /* --- CONTACT FORM --- */
+                    /* Full-width form button on mobile */
+                    .contact-form .btn {
+                        width: 100%;
+                    }
+                    /* --- END CONTACT FORM --- */
+
+
+                    /* --- MOBILE MENU --- */
+                    /* Full-width mobile menu for better usability */
+                    .menu-links {
+                        width: 100vw;
+                        right: -20px;
+                        border-radius: 0;
+                        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                    }
+
+                    /* Add separators between menu items */
+                    .menu-links li {
+                        padding: 1rem 2rem;
+                        border-bottom: 1px solid #f1f5f9;
+                    }
+
+                    /* Remove border from last item */
+                    .menu-links li:last-child {
+                        border-bottom: none;
+                    }
+                    /* --- END MOBILE MENU --- */
+                }
+
+
+                /* ============================================
+                   5. VERY SMALL DEVICES (Small Phones: 400px and below)
+                   ============================================ */
+
+                @media screen and (max-width: 400px) {
+                    /*
+                      For very small smartphones (under 400px)
+                      Critical adjustments for minimal screen sizes
+                    */
+
+                    /* Reduce container padding to maximize screen space */
+                    .container {
+                        padding: 0 15px;
+                    }
+
+                    /* Further reduce text sizes */
+                    .hero-title {
+                        font-size: 1.8rem;
+                    }
+
+                    .section-title {
+                        font-size: 1.6rem;
+                    }
+
+                    /* Minimal profile image size */
+                    .image-container {
+                        width: 220px;
+                        height: 220px;
+                    }
+
+                    /* Reduce padding in cards to save space */
+                    .stat-card,
+                    .skill-category,
+                    .contact-card {
+                        padding: 1.5rem 1rem;
+                    }
+
+                    /* Stack project links vertically */
+                    .project-links {
+                        flex-direction: column;
+                    }
+
+                    /* Center project links */
+                    .project-link {
+                        justify-content: center;
+                    }
+                }
+
+
+                /* ============================================
+                   6. PRINT STYLES
+                   ============================================ */
+
+                @media print {
+                    /*
+                      Styles optimized for printing the webpage
+                      Hides unnecessary elements and adjusts layout for paper
+                    */
+
+                    /* Hide interactive elements that don't make sense on paper */
+                    .hamburger-menu,
+                    .social-links,
+                    .btn-container,
+                    .scroll-down {
+                        display: none !important;
+                    }
+
+                    /* Adjust hero section for printing */
+                    .hero-section {
+                        min-height: auto;
+                        padding: 40px 0;
+                    }
+
+                    /* Prevent page breaks inside sections */
+                    section {
+                        page-break-inside: avoid;
+                        padding: 40px 0;
+                    }
+
+                    /* Adjust footer for printing */
+                    .footer {
+                        padding: 20px 0;
+                    }
+                }
+
+
+                /* ============================================
+                   7. HIGH-DPI SCREENS (Retina Displays)
+                   ============================================ */
+
+                @media screen and (-webkit-min-device-pixel-ratio: 2),
+                       screen and (min-resolution: 192dpi) {
+                    /*
+                      Optimizations for high-resolution screens (Retina displays)
+                      Ensures images appear crisp and clear
+                    */
+
+                    /* Enable high-quality image rendering */
+                    .profile-image,
+                    .about-pic,
+                    .project-image img {
+                        image-rendering: -webkit-optimize-contrast;
+                        image-rendering: crisp-edges;
+                    }
+                }
+
+
+                /* ============================================
+                   8. DARK MODE SUPPORT
+                   ============================================ */
+
+                @media (prefers-color-scheme: dark) {
+                    /*
+                      Automatic dark mode styling based on user's system preference
+                      Uses CSS custom properties for easier theme switching
+                    */
+
+                    /* Base dark theme colors */
+                    body {
+                        background-color: #0f172a;
+                        color: #f1f5f9;
+                    }
+
+                    /* Text color adjustments for dark mode */
+                    .logo,
+                    .nav-links a,
+                    .hero-title,
+                    .section-title,
+                    .project-content h3,
+                    .skill-category h3,
+                    .contact-card h3 {
+                        color: #f1f5f9;
+                    }
+
+                    /* Paragraph text color for dark mode */
+                    p {
+                        color: #94a3b8;
+                    }
+
+                    /* Card backgrounds for dark mode */
+                    .stat-card,
+                    .skill-category,
+                    .contact-card,
+                    .project-card {
+                        background-color: #1e293b;
+                        color: #f1f5f9;
+                    }
+
+                    /* Form elements in dark mode */
+                    .form-group input,
+                    .form-group textarea {
+                        background-color: #1e293b;
+                        border-color: #334155;
+                        color: #f1f5f9;
+                    }
+
+                    /* Project links in dark mode */
+                    .project-link {
+                        background-color: #334155;
+                        color: #f1f5f9;
+                    }
+
+                    /* Header adjustments for dark mode */
+                    header {
+                        background-color: rgba(15, 23, 42, 0.95);
+                    }
+
+                    /* Hamburger icon color in dark mode */
+                    .hamburger-icon span {
+                        background-color: #f1f5f9;
+                    }
+
+                    /* Mobile menu in dark mode */
+                    .menu-links {
+                        background-color: #1e293b;
+                    }
+
+                    .menu-links a {
+                        color: #f1f5f9;
+                    }
+                }
+
+
+                /* ============================================
+                   9. REDUCED MOTION SUPPORT
+                   ============================================ */
+
+                @media (prefers-reduced-motion: reduce) {
+                    /*
+                      Accessibility feature for users who prefer reduced motion
+                      Removes or reduces animations and transitions
+                    */
+
+                    /* Disable all animations and transitions */
+                    *,
+                    *::before,
+                    *::after {
+                        animation-duration: 0.01ms !important;
+                        animation-iteration-count: 1 !important;
+                        transition-duration: 0.01ms !important;
+                    }
+
+                    /* Disable smooth scrolling */
+                    html {
+                        scroll-behavior: auto;
+                    }
+                }
