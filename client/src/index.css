@@ -1,0 +1,1351 @@
+/* ===== BASE STYLES ===== */
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #7c3aed;
+    --dark-color: #1e293b;
+    --light-color: #f8fafc;
+    --gray-color: #64748b;
+    --success-color: #10b981;
+    --border-radius: 12px;
+    --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: var(--dark-color);
+    background-color: var(--light-color);
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1, h2, h3, h4 {
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+p {
+    color: var(--gray-color);
+    margin-bottom: 1rem;
+}
+
+.highlight {
+    color: var(--primary-color);
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 28px;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    outline: none;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: var(--box-shadow);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* ===== NAVIGATION ===== */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+#desktop-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--dark-color);
+}
+
+.logo span {
+    color: var(--primary-color);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--dark-color);
+    font-weight: 500;
+    font-size: 1.1rem;
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+#hamburger-nav {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.hamburger-menu {
+    position: relative;
+}
+
+.hamburger-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.hamburger-icon span {
+    width: 100%;
+    height: 3px;
+    background-color: var(--dark-color);
+    border-radius: 2px;
+    transition: var(--transition);
+}
+
+.menu-links {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 250px;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: var(--transition);
+}
+
+.menu-links.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.menu-links ul {
+    list-style: none;
+    padding: 1rem 0;
+}
+
+.menu-links li {
+    padding: 0.75rem 2rem;
+}
+
+.menu-links a {
+    text-decoration: none;
+    color: var(--dark-color);
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: var(--transition);
+}
+
+.menu-links a:hover {
+    color: var(--primary-color);
+}
+
+/* ===== HERO SECTION ===== */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+    position: relative;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.hero-text {
+    animation: fadeInUp 1s ease;
+}
+
+.greeting {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: var(--dark-color);
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    color: var(--gray-color);
+    margin-bottom: 1.5rem;
+}
+
+.hero-description {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    max-width: 500px;
+}
+
+.btn-container {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.social-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background-color: white;
+    border-radius: 50%;
+    color: var(--dark-color);
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: var(--transition);
+    box-shadow: var(--box-shadow);
+}
+
+.social-links a:hover {
+    transform: translateY(-3px);
+    color: var(--primary-color);
+}
+
+.hero-image {
+    animation: fadeIn 1s ease 0.5s both;
+}
+
+.image-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 8px solid white;
+    box-shadow: var(--box-shadow);
+}
+
+.image-frame {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    border: 2px dashed var(--primary-color);
+    border-radius: 50%;
+    z-index: -1;
+    animation: rotate 20s linear infinite;
+}
+
+.scroll-down {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--gray-color);
+    font-size: 1.5rem;
+    animation: bounce 2s infinite;
+}
+
+/* ===== SECTIONS COMMON STYLES ===== */
+section {
+    padding: 80px 0;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-subtitle {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    color: var(--dark-color);
+    margin-bottom: 1rem;
+}
+
+.title-underline {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    margin: 0 auto;
+    border-radius: 2px;
+}
+
+/* ===== ABOUT SECTION ===== */
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.about-image {
+    text-align: center;
+}
+
+.about-pic {
+    width: 100%;
+    max-width: 400px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.about-text p {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+/* ===== EXPERIENCE SECTION ===== */
+.experience-section {
+    background-color: #f8fafc;
+}
+
+.experience-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+}
+
+.skill-category {
+    background-color: white;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.category-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.skills-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.skill-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.skill-name {
+    flex: 1;
+    font-weight: 500;
+}
+
+.skill-level {
+    flex: 2;
+    height: 8px;
+    background-color: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.skill-bar {
+    height: 100%;
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    border-radius: 4px;
+    transition: width 1s ease-in-out;
+}
+
+.skill-label {
+    flex: 1;
+    text-align: right;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* ===== PROJECTS SECTION ===== */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.project-card {
+    background-color: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+}
+
+.project-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.05);
+}
+
+.project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(37, 99, 235, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.project-card:hover .project-overlay {
+    opacity: 1;
+}
+
+.tech-stack {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.tech-tag {
+    background-color: white;
+    color: var(--primary-color);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.project-content {
+    padding: 1.5rem;
+}
+
+.project-content h3 {
+    margin-bottom: 1rem;
+    color: var(--dark-color);
+}
+
+.project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+}
+
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #f1f5f9;
+    color: var(--dark-color);
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.project-link:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.live-demo {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.live-demo:hover {
+    background-color: #1d4ed8;
+}
+
+/* ===== CONTACT SECTION ===== */
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+}
+
+.contact-info {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.contact-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+}
+
+.contact-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.contact-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.contact-link:hover {
+    color: var(--secondary-color);
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: var(--border-radius);
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    background-color: var(--dark-color);
+    color: white;
+    padding: 4rem 0 2rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-logo h2 {
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.footer-logo p {
+    color: #94a3b8;
+}
+
+.footer-links h3,
+.footer-social h3 {
+    color: white;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+}
+
+.footer-links ul {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.social-icons a:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-bottom p {
+    color: #94a3b8;
+    margin-bottom: 0.5rem;
+}
+
+.footer-bottom .fa-heart {
+    color: #ef4444;
+    margin: 0 5px;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0) translateX(-50%);
+    }
+    40% {
+        transform: translateY(-10px) translateX(-50%);
+    }
+    60% {
+        transform: translateY(-5px) translateX(-50%);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ===== UTILITY CLASSES ===== */
+.text-center {
+    text-align: center;
+}
+
+.mt-1 { margin-top: 1rem; }
+.mt-2 { margin-top: 2rem; }
+.mt-3 { margin-top: 3rem; }
+.mb-1 { margin-bottom: 1rem; }
+.mb-2 { margin-bottom: 2rem; }
+.mb-3 { margin-bottom: 3rem; }
+
+/* ============================================
+                   MEDIA QUERIES - RESPONSIVE DESIGN STYLES
+                   ============================================ */
+
+                /*
+                  File Structure:
+                  1. Large Devices (Laptops/Desktops)
+                  2. Medium Devices (Tablets)
+                  3. Small Devices (Large Phones)
+                  4. Extra Small Devices (Phones)
+                  5. Very Small Devices (Small Phones)
+                  6. Print Styles
+                  7. High-DPI Screens
+                  8. Dark Mode Support
+                  9. Reduced Motion Support
+                */
+
+
+                /* ============================================
+                   1. LARGE DEVICES (Laptops/Desktops: 1200px and below)
+                   ============================================ */
+
+                @media screen and (max-width: 1200px) {
+                    /* 
+                      For screens smaller than 1200px (smaller laptops, large tablets in landscape)
+                      These adjustments help content fit better on medium-sized screens
+                    */
+
+                    /* Reduce hero title size for better proportion */
+                    .hero-title {
+                        font-size: 3rem;
+                    }
+
+                    /* Adjust profile image container size */
+                    .image-container {
+                        width: 350px;
+                        height: 350px;
+                    }
+
+                    /* Reduce spacing between experience sections */
+                    .experience-grid {
+                        gap: 2rem;
+                    }
+                }
+
+
+                /* ============================================
+                   2. MEDIUM DEVICES (Tablets: 992px and below)
+                   ============================================ */
+
+                @media screen and (max-width: 992px) {
+                    /*
+                      For tablets and small laptops (768px - 992px)
+                      Major layout changes: switching from side-by-side to stacked content
+                    */
+
+                    /* Increase container padding for better touch targets on tablets */
+                    .container {
+                        padding: 0 30px;
+                    }
+
+                    /* --- NAVIGATION --- */
+                    /* Hide desktop navigation, show hamburger menu */
+                    #desktop-nav {
+                        display: none;
+                    }
+
+                    #hamburger-nav {
+                        display: flex;
+                    }
+                    /* --- END NAVIGATION --- */
+
+
+                    /* --- HERO SECTION --- */
+                    /* Stack hero content vertically (image below text) */
+                    .hero-content {
+                        grid-template-columns: 1fr;
+                        text-align: center;
+                        gap: 3rem;
+                    }
+
+                    /* Center hero description */
+                    .hero-description {
+                        margin: 0 auto 2rem;
+                    }
+
+                    /* Center buttons and social links */
+                    .btn-container {
+                        justify-content: center;
+                    }
+
+                    .social-links {
+                        justify-content: center;
+                    }
+                    /* --- END HERO SECTION --- */
+
+
+                    /* --- ABOUT SECTION --- */
+                    /* Stack about content vertically */
+                    .about-content {
+                        grid-template-columns: 1fr;
+                        gap: 3rem;
+                    }
+                    /* --- END ABOUT SECTION --- */
+
+
+                    /* --- EXPERIENCE SECTION --- */
+                    /* Stack skill categories vertically */
+                    .experience-grid {
+                        grid-template-columns: 1fr;
+                        max-width: 600px;
+                        margin: 0 auto;
+                    }
+                    /* --- END EXPERIENCE SECTION --- */
+
+
+                    /* --- PROJECTS SECTION --- */
+                    /* Adjust project grid for better tablet display */
+                    .projects-grid {
+                        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                    }
+                    /* --- END PROJECTS SECTION --- */
+
+
+                    /* --- CONTACT SECTION --- */
+                    /* Stack contact form below contact info */
+                    .contact-content {
+                        grid-template-columns: 1fr;
+                        gap: 3rem;
+                        max-width: 600px;
+                        margin: 0 auto;
+                    }
+                    /* --- END CONTACT SECTION --- */
+
+
+                    /* --- FOOTER --- */
+                    /* Adjust footer layout for tablet */
+                    .footer-content {
+                        grid-template-columns: repeat(2, 1fr);
+                    }
+
+                    /* Make logo span full width */
+                    .footer-logo {
+                        grid-column: 1 / -1;
+                        text-align: center;
+                    }
+                    /* --- END FOOTER --- */
+                }
+
+
+                /* ============================================
+                   3. SMALL DEVICES (Large Phones: 768px and below)
+                   ============================================ */
+
+                @media screen and (max-width: 768px) {
+                    /*
+                      For large smartphones (576px - 768px)
+                      Further adjustments for better mobile experience
+                    */
+
+                    /* --- TYPOGRAPHY --- */
+                    /* Reduce font sizes for better readability on mobile */
+                    .hero-title {
+                        font-size: 2.5rem;
+                    }
+
+                    .section-title {
+                        font-size: 2rem;
+                    }
+                    /* --- END TYPOGRAPHY --- */
+
+
+                    /* --- HERO SECTION --- */
+                    /* Further reduce profile image size */
+                    .image-container {
+                        width: 300px;
+                        height: 300px;
+                    }
+
+                    /* Stack buttons vertically on mobile */
+                    .btn-container {
+                        flex-direction: column;
+                        align-items: center;
+                    }
+
+                    /* Make buttons full-width on mobile */
+                    .btn {
+                        width: 100%;
+                        max-width: 250px;
+                    }
+                    /* --- END HERO SECTION --- */
+
+
+                    /* --- ABOUT SECTION --- */
+                    /* Stack stats vertically on mobile */
+                    .stats-container {
+                        grid-template-columns: 1fr;
+                    }
+                    /* --- END ABOUT SECTION --- */
+
+
+                    /* --- PROJECTS SECTION --- */
+                    /* Single column for projects on mobile */
+                    .projects-grid {
+                        grid-template-columns: 1fr;
+                    }
+                    /* --- END PROJECTS SECTION --- */
+
+
+                    /* --- FOOTER --- */
+                    /* Single column footer on mobile */
+                    .footer-content {
+                        grid-template-columns: 1fr;
+                        text-align: center;
+                    }
+
+                    /* Center social icons */
+                    .social-icons {
+                        justify-content: center;
+                    }
+                    /* --- END FOOTER --- */
+                }
+
+
+                /* ============================================
+                   4. EXTRA SMALL DEVICES (Phones: 576px and below)
+                   ============================================ */
+
+                @media screen and (max-width: 576px) {
+                    /*
+                      For standard smartphones (375px - 576px)
+                      Critical adjustments for small screen usability
+                    */
+
+                    /* --- NAVIGATION --- */
+                    /* Reduce navigation padding on very small screens */
+                    #hamburger-nav {
+                        padding: 1rem;
+                    }
+                    /* --- END NAVIGATION --- */
+
+
+                    /* --- HERO SECTION --- */
+                    /* Adjust top padding for fixed header */
+                    .hero-section {
+                        padding-top: 70px;
+                    }
+
+                    /* Further reduce hero text sizes */
+                    .hero-title {
+                        font-size: 2rem;
+                    }
+
+                    .hero-subtitle {
+                        font-size: 1.2rem;
+                    }
+
+                    /* Smaller profile image for very small screens */
+                    .image-container {
+                        width: 250px;
+                        height: 250px;
+                    }
+                    /* --- END HERO SECTION --- */
+
+
+                    /* --- SECTIONS COMMON STYLES --- */
+                    /* Reduce section padding on mobile */
+                    section {
+                        padding: 60px 0;
+                    }
+
+                    /* Smaller section titles */
+                    .section-title {
+                        font-size: 1.8rem;
+                    }
+                    /* --- END SECTIONS COMMON STYLES --- */
+
+
+                    /* --- CONTACT FORM --- */
+                    /* Full-width form button on mobile */
+                    .contact-form .btn {
+                        width: 100%;
+                    }
+                    /* --- END CONTACT FORM --- */
+
+
+                    /* --- MOBILE MENU --- */
+                    /* Full-width mobile menu for better usability */
+                    .menu-links {
+                        width: 100vw;
+                        right: -20px;
+                        border-radius: 0;
+                        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                    }
+
+                    /* Add separators between menu items */
+                    .menu-links li {
+                        padding: 1rem 2rem;
+                        border-bottom: 1px solid #f1f5f9;
+                    }
+
+                    /* Remove border from last item */
+                    .menu-links li:last-child {
+                        border-bottom: none;
+                    }
+                    /* --- END MOBILE MENU --- */
+                }
+
+
+                /* ============================================
+                   5. VERY SMALL DEVICES (Small Phones: 400px and below)
+                   ============================================ */
+
+                @media screen and (max-width: 400px) {
+                    /*
+                      For very small smartphones (under 400px)
+                      Critical adjustments for minimal screen sizes
+                    */
+
+                    /* Reduce container padding to maximize screen space */
+                    .container {
+                        padding: 0 15px;
+                    }
+
+                    /* Further reduce text sizes */
+                    .hero-title {
+                        font-size: 1.8rem;
+                    }
+
+                    .section-title {
+                        font-size: 1.6rem;
+                    }
+
+                    /* Minimal profile image size */
+                    .image-container {
+                        width: 220px;
+                        height: 220px;
+                    }
+
+                    /* Reduce padding in cards to save space */
+                    .stat-card,
+                    .skill-category,
+                    .contact-card {
+                        padding: 1.5rem 1rem;
+                    }
+
+                    /* Stack project links vertically */
+                    .project-links {
+                        flex-direction: column;
+                    }
+
+                    /* Center project links */
+                    .project-link {
+                        justify-content: center;
+                    }
+                }
+
+
+                /* ============================================
+                   6. PRINT STYLES
+                   ============================================ */
+
+                @media print {
+                    /*
+                      Styles optimized for printing the webpage
+                      Hides unnecessary elements and adjusts layout for paper
+                    */
+
+                    /* Hide interactive elements that don't make sense on paper */
+                    .hamburger-menu,
+                    .social-links,
+                    .btn-container,
+                    .scroll-down {
+                        display: none !important;
+                    }
+
+                    /* Adjust hero section for printing */
+                    .hero-section {
+                        min-height: auto;
+                        padding: 40px 0;
+                    }
+
+                    /* Prevent page breaks inside sections */
+                    section {
+                        page-break-inside: avoid;
+                        padding: 40px 0;
+                    }
+
+                    /* Adjust footer for printing */
+                    .footer {
+                        padding: 20px 0;
+                    }
+                }
+
+
+                /* ============================================
+                   7. HIGH-DPI SCREENS (Retina Displays)
+                   ============================================ */
+
+                @media screen and (-webkit-min-device-pixel-ratio: 2),
+                       screen and (min-resolution: 192dpi) {
+                    /*
+                      Optimizations for high-resolution screens (Retina displays)
+                      Ensures images appear crisp and clear
+                    */
+
+                    /* Enable high-quality image rendering */
+                    .profile-image,
+                    .about-pic,
+                    .project-image img {
+                        image-rendering: -webkit-optimize-contrast;
+                        image-rendering: crisp-edges;
+                    }
+                }
+
+
+                /* ============================================
+                   8. DARK MODE SUPPORT
+                   ============================================ */
+
+                @media (prefers-color-scheme: dark) {
+                    /*
+                      Automatic dark mode styling based on user's system preference
+                      Uses CSS custom properties for easier theme switching
+                    */
+
+                    /* Base dark theme colors */
+                    body {
+                        background-color: #0f172a;
+                        color: #f1f5f9;
+                    }
+
+                    /* Text color adjustments for dark mode */
+                    .logo,
+                    .nav-links a,
+                    .hero-title,
+                    .section-title,
+                    .project-content h3,
+                    .skill-category h3,
+                    .contact-card h3 {
+                        color: #f1f5f9;
+                    }
+
+                    /* Paragraph text color for dark mode */
+                    p {
+                        color: #94a3b8;
+                    }
+
+                    /* Card backgrounds for dark mode */
+                    .stat-card,
+                    .skill-category,
+                    .contact-card,
+                    .project-card {
+                        background-color: #1e293b;
+                        color: #f1f5f9;
+                    }
+
+                    /* Form elements in dark mode */
+                    .form-group input,
+                    .form-group textarea {
+                        background-color: #1e293b;
+                        border-color: #334155;
+                        color: #f1f5f9;
+                    }
+
+                    /* Project links in dark mode */
+                    .project-link {
+                        background-color: #334155;
+                        color: #f1f5f9;
+                    }
+
+                    /* Header adjustments for dark mode */
+                    header {
+                        background-color: rgba(15, 23, 42, 0.95);
+                    }
+
+                    /* Hamburger icon color in dark mode */
+                    .hamburger-icon span {
+                        background-color: #f1f5f9;
+                    }
+
+                    /* Mobile menu in dark mode */
+                    .menu-links {
+                        background-color: #1e293b;
+                    }
+
+                    .menu-links a {
+                        color: #f1f5f9;
+                    }
+                }
+
+
+                /* ============================================
+                   9. REDUCED MOTION SUPPORT
+                   ============================================ */
+
+                @media (prefers-reduced-motion: reduce) {
+                    /*
+                      Accessibility feature for users who prefer reduced motion
+                      Removes or reduces animations and transitions
+                    */
+
+                    /* Disable all animations and transitions */
+                    *,
+                    *::before,
+                    *::after {
+                        animation-duration: 0.01ms !important;
+                        animation-iteration-count: 1 !important;
+                        transition-duration: 0.01ms !important;
+                    }
+
+                    /* Disable smooth scrolling */
+                    html {
+                        scroll-behavior: auto;
+                    }
+                }

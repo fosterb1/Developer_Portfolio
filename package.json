@@ -1,0 +1,29 @@
+{
+  "name": "developer_portfolio",
+  "version": "1.0.0",
+  "description": "Authenticated, dynamic developer portfolio with API + React frontend.",
+  "main": "scripts.js",
+  "scripts": {
+    "dev": "npm run dev --prefix server",
+    "dev:server": "npm run dev --prefix server",
+    "dev:client": "npm run dev --prefix client -- --host --port 5173",
+    "build": "npm run build --prefix client",
+    "vercel-build": "npm run build --prefix client",
+    "start": "npm run start --prefix server",
+    "seed": "npm run seed --prefix server",
+    "install:all": "npm install --prefix server && npm install --prefix client",
+    "test": "echo \"No tests configured yet\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fosterb1/Developer_Portfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/fosterb1/Developer_Portfolio/issues"
+  },
+  "homepage": "https://github.com/fosterb1/Developer_Portfolio#readme"
+}
