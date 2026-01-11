@@ -1,6 +1,6 @@
 const path = require("path");
 const dotenv = require("dotenv");
-const { client } = require("./db");
+const { client, initSchema } = require("./db");
 const { createProject } = require("./projectStore");
 const { updateProfile } = require("./profileStore");
 const { createSkill } = require("./skillStore");
@@ -10,6 +10,20 @@ dotenv.config({ path: path.join(__dirname, ".env") });
 async function seed() {
   console.log("Starting seed...");
   try {
+    // Ensure schema is initialized
+    await initSchema();
+
+    // Seed Admin User
+    const adminEmail = process.env.ADMIN_EMAIL;
+    const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH;
+    if (adminEmail && adminPasswordHash) {
+      await client.execute({
+        sql: "INSERT OR REPLACE INTO users (id, email, password_hash) VALUES (1, ?, ?)",
+        args: [adminEmail, adminPasswordHash]
+      });
+      console.log("Admin user seeded.");
+    }
+
     // Clear existing tables
     await client.execute("DELETE FROM projects");
     await client.execute("DELETE FROM skills");

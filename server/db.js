@@ -14,6 +14,15 @@ const client = createClient({
 
 const initSchema = async () => {
   await client.execute(`
+    CREATE TABLE IF NOT EXISTS users (
+      id INTEGER PRIMARY KEY CHECK (id = 1),
+      email TEXT NOT NULL,
+      password_hash TEXT NOT NULL,
+      updated_at TEXT DEFAULT CURRENT_TIMESTAMP
+    )
+  `);
+
+  await client.execute(`
     CREATE TABLE IF NOT EXISTS projects (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       title TEXT NOT NULL,

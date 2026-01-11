@@ -3,6 +3,7 @@ import { request, API_BASE } from '../services/api';
 import ProjectForm from '../components/ProjectForm';
 import ProfileForm from '../components/ProfileForm';
 import SkillManager from '../components/SkillManager';
+import SecuritySettings from '../components/SecuritySettings';
 import { useAuth } from '../state/AuthContext';
 import { useProfile } from '../state/ProfileContext';
 import { useNavigate } from 'react-router-dom';
@@ -111,6 +112,19 @@ const Admin = () => {
       }
   };
 
+  const handleUpdateCredentials = async (data) => {
+    try {
+      await request('/api/auth/update-credentials', {
+        method: 'PUT',
+        data,
+        token: token,
+      });
+      alert("Login credentials updated successfully!");
+    } catch (err) {
+      alert(`Error updating credentials: ${err.message}`);
+    }
+  };
+
   const handleLogout = () => {
     logout();
     navigate('/');
@@ -147,12 +161,28 @@ const Admin = () => {
         >
             <i className="fas fa-chart-bar"></i> Skills
         </button>
+        <button 
+            className={`btn ${activeTab === 'security' ? 'btn-primary' : 'btn-secondary'}`}
+            style={{ borderRadius: '12px 12px 0 0', borderBottom: activeTab === 'security' ? 'none' : '' }}
+            onClick={() => setActiveTab('security')}
+        >
+            <i className="fas fa-shield-alt"></i> Security
+        </button>
       </div>
 
       {error && (
         <div style={{ backgroundColor: '#fee2e2', color: '#ef4444', padding: '1rem', borderRadius: '12px', marginBottom: '2rem' }}>
           {error}
         </div>
+      )}
+
+      {activeTab === 'security' && (
+          <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+              <SecuritySettings 
+                currentEmail={useAuth().user?.email} 
+                onUpdate={handleUpdateCredentials} 
+              />
+          </div>
       )}
 
       {activeTab === 'profile' && (

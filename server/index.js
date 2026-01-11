@@ -154,28 +154,34 @@ app.delete("/api/skills/:id", requireAuth, async (req, res) => {
 app.post("/api/auth/login", async (req, res) => {
   try {
     const { email, password } = req.body || {};
-    const adminEmail = process.env.ADMIN_EMAIL;
-    const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH;
-
-    if (!adminEmail || !adminPasswordHash) {
-      return res.status(500).json({ error: "Server auth is not configured" });
-    }
 
     if (!email || !password) {
       return res.status(400).json({ error: "Email and password are required" });
     }
 
-    if (email !== adminEmail) {
+    // Query the database for the admin user
+    const result = await client.execute({
+      sql: "SELECT * FROM users WHERE id = 1",
+      args: []
+    });
+    
+    const user = result.rows[0];
+
+    if (!user) {
+      return res.status(500).json({ error: "Server auth is not configured" });
+    }
+
+    if (email !== user.email) {
       return res.status(401).json({ error: "Invalid credentials" });
     }
 
-    const valid = await bcrypt.compare(password, adminPasswordHash);
+    const valid = await bcrypt.compare(password, user.password_hash);
     if (!valid) {
       return res.status(401).json({ error: "Invalid credentials" });
     }
 
-    const token = signToken({ email, role: "owner" });
-    res.json({ token, user: { email, role: "owner" } });
+    const token = signToken({ email: user.email, role: "owner" });
+    res.json({ token, user: { email: user.email, role: "owner" } });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -183,6 +189,35 @@ app.post("/api/auth/login", async (req, res) => {
 
 app.get("/api/auth/me", requireAuth, (req, res) => {
   res.json({ user: { email: req.user.email, role: req.user.role } });
+});
+
+app.put("/api/auth/update-credentials", requireAuth, async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    
+    if (!email && !password) {
+      return res.status(400).json({ error: "Email or password is required" });
+    }
+
+    const result = await client.execute("SELECT * FROM users WHERE id = 1");
+    const user = result.rows[0];
+
+    let newEmail = email || user.email;
+    let newHash = user.password_hash;
+
+    if (password) {
+      newHash = await bcrypt.hash(password, 10);
+    }
+
+    await client.execute({
+      sql: "UPDATE users SET email = ?, password_hash = ?, updated_at = CURRENT_TIMESTAMP WHERE id = 1",
+      args: [newEmail, newHash]
+    });
+
+    res.json({ success: true, message: "Credentials updated successfully" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 app.get("/api/projects", async (_req, res) => {
