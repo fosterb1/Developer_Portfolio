@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Foster Boadi - Full Stack Developer Portfolio">
+    <meta name="keywords" content="web developer, full stack developer, portfolio, software engineer">
+    <title>Foster Boadi | Full-Stack Developer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mediaqueries.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <header>
+        <nav id="desktop-nav">
+            <div class="logo">Foster<span>Boadi</span></div>
+            <div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+        
+        <nav id="hamburger-nav">
+            <div class="logo">Foster<span>Boadi</span></div>
+            <div class="hamburger-menu">
+                <button class="hamburger-icon" onclick="toggleMenu()" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="menu-links">
+                    <ul>
+                        <li><a href="#home" onclick="toggleMenu()">Home</a></li>
+                        <li><a href="#about" onclick="toggleMenu()">About</a></li>
+                        <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
+                        <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
+                        <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <p class="greeting">Hello, I'm</p>
+                    <h1 class="hero-title">Foster <span class="highlight">Boadi</span></h1>
+                    <p class="hero-subtitle">Full-Stack Developer</p>
+                    <p class="hero-description">Crafting digital experiences with clean code and modern technologies</p>
+                    
+                    <div class="btn-container">
+                        <button class="btn btn-primary" onclick="window.open('./assets/resume.pdf')">
+                            <i class="fas fa-download"></i> Download CV
+                        </button>
+                        <button class="btn btn-secondary" onclick="location.href='./#contact'">
+                            <i class="fas fa-envelope"></i> Contact Me
+                        </button>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="https://linkedin.com/in/fosterboadi" target="_blank" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/fosterb1" target="_blank" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://x.com/KobbyP4" target="_blank" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://web.facebook.com/foster.boadi.52012/" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="hero-image">
+                    <div class="image-container">
+                        <img src="./assets/foster.jpg" alt="Foster Boadi - Full Stack Developer" class="profile-image">
+                        <div class="image-frame"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <a href="#about" class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">Get To Know More</p>
+                <h2 class="section-title">About Me</h2>
+                <div class="title-underline"></div>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="./assets/about-pic.png" alt="Foster Boadi working" class="about-pic">
+                </div>
+                
+                <div class="about-info">
+                    <div class="stats-container">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <h3>Experience</h3>
+                            <p>1+ Year <br>Full-Stack Development</p>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h3>Education</h3>
+                            <p>Diploma in Software Development<br>BSc. Computer Science</p>
+                        </div>
+                    </div>
+                    
+                    <div class="about-text">
+                        <p>
+                            I am a passionate full-stack developer with experience in crafting dynamic, 
+                            user-friendly web applications using modern technologies. My expertise spans 
+                            both front-end and back-end development, with strong proficiency in JavaScript, 
+                            React, Node.js, and Python.
+                        </p>
+                        <p>
+                            I'm committed to continuous learning and staying current with industry trends 
+                            to deliver efficient, scalable, and innovative solutions that solve real-world 
+                            problems.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">Explore My</p>
+                <h2 class="section-title">Experience</h2>
+                <div class="title-underline"></div>
+            </div>
+            
+            <div class="experience-grid">
+                <!-- Frontend Skills -->
+                <div class="skill-category">
+                    <div class="category-header">
+                        <i class="fas fa-code category-icon"></i>
+                        <h3>Frontend Development</h3>
+                    </div>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <span class="skill-name">HTML5</span>
+                            <div class="skill-level">
+                                <div class="skill-bar" style="width: 95%"></div>
+                            </div>
+                            <span class="skill-label">Expert</span>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <span class="skill-name">CSS3</span>
+                            <div class="skill-level">
+                                <div class="skill-bar" style="width: 90%"></div>
+                            </div>
+                            <span class="skill-label">Expert</span>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <span class="skill-name">JavaScript</span>
+                            <div class="skill-level">
+                                <div class="skill-bar" style="width: 85%"></div>
+                            </div>
+                            <span class="skill-label">Advanced</span>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <span class="skill-name">React</span>
+                            <div class="skill-level">
+                                <div class="skill-bar" style="width: 80%"></div>
+                            </div>
+                            <span class="skill-label">Advanced</span>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <span class="skill-name">TypeScript</span>
+                            <div class="skill-level">
+                                <div class="skill-bar" style="width: 75%"></div>
+                            </div>
+                            <span class="skill-label">Intermediate</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Backend Skills -->
+                <div class="skill-category">
+                    <div class="category-header">
+                        <i class="fas fa-server category-icon"></i>
+                        <h3>Backend Development</h3>
+                    </div>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <span class="skill-name">Node.js</span>
+                            <div class="skill-level">
+                                <div class="skill-bar" style="width: 85%"></div>
+                            </div>
+                            <span class="skill-label">Advanced</span>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <span class="skill-name">Express.js</span>
+                            <div class="skill-level">
+                                <div class="skill-bar" style="width: 80%"></div>
+                            </div>
+                            <span class="skill-label">Advanced</span>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <span class="skill-name">Python</span>
+                            <div class="skill-level">
+                                <div class="skill-bar" style="width: 75%"></div>
+                            </div>
+                            <span class="skill-label">Intermediate</span>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <span class="skill-name">PostgreSQL</span>
+                            <div class="skill-level">
+                                <div class="skill-bar" style="width: 70%"></div>
+                            </div>
+                            <span class="skill-label">Intermediate</span>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <span class="skill-name">Git</span>
+                            <div class="skill-level">
+                                <div class="skill-bar" style="width: 85%"></div>
+                            </div>
+                            <span class="skill-label">Advanced</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">Browse My Recent</p>
+                <h2 class="section-title">Projects</h2>
+                <div class="title-underline"></div>
+            </div>
+            
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="./assets/project1.png" alt="Project 1">
+                        <div class="project-overlay">
+                            <div class="tech-stack">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">MongoDB</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>E-Commerce Platform</h3>
+                        <p>Full-featured online shopping platform with user authentication, payment processing, and admin dashboard.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/" target="_blank" class="project-link">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="https://github.com/" target="_blank" class="project-link live-demo">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="./assets/project1.png" alt="Project 2">
+                        <div class="project-overlay">
+                            <div class="tech-stack">
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">Express</span>
+                                <span class="tech-tag">PostgreSQL</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Task Management App</h3>
+                        <p>Collaborative task management application with real-time updates and team collaboration features.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/" target="_blank" class="project-link">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="https://github.com/" target="_blank" class="project-link live-demo">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="./assets/project1.png" alt="Project 3">
+                        <div class="project-overlay">
+                            <div class="tech-stack">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Django</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Weather Dashboard</h3>
+                        <p>Real-time weather application with location-based forecasts, charts, and historical data.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/" target="_blank" class="project-link">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="https://github.com/" target="_blank" class="project-link live-demo">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">Get In Touch</p>
+                <h2 class="section-title">Contact Me</h2>
+                <div class="title-underline"></div>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Email</h3>
+                        <p>fosterboadi152@gmail.com</p>
+                        <a href="mailto:fosterboadi152@gmail.com" class="contact-link">Send Message</a>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <h3>LinkedIn</h3>
+                        <p>Connect professionally</p>
+                        <a href="https://www.linkedin.com/in/fosterboadi/" target="_blank" class="contact-link">Visit Profile</a>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <h3>GitHub</h3>
+                        <p>View my projects</p>
+                        <a href="https://github.com/fosterb1" target="_blank" class="contact-link">Browse Code</a>
+                    </div>
+                </div>
+                
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>Foster<span>Boadi</span></h2>
+                    <p>Full-Stack Developer</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#experience">Experience</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-social">
+                    <h3>Connect With Me</h3>
+                    <div class="social-icons">
+                        <a href="https://linkedin.com/in/fosterboadi" target="_blank" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/fosterb1" target="_blank" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://x.com/KobbyP4" target="_blank" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="mailto:fosterboadi152@gmail.com" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> Foster Boadi. All rights reserved.</p>
+                <p>Designed & Developed with <i class="fas fa-heart"></i> by Foster</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
