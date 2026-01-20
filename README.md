@@ -17,12 +17,14 @@ A high-performance, full-stack developer portfolio featuring a custom-built Cont
 ## 🛠️ Tech Stack
 
 ### Frontend
+
 - **React (Vite):** Fast, modern UI development.
 - **React Router 7:** Handling Single Page Application (SPA) routing.
 - **Context API:** Global state management for Auth and Profile data.
 - **CSS3:** Custom variables and responsive design (no heavy frameworks).
 
 ### Backend
+
 - **Node.js & Express:** Lightweight and scalable API.
 - **Turso (libSQL):** Edge-compatible SQLite database for ultra-low latency.
 - **Cloudinary:** Cloud-based image management and optimization.
@@ -46,12 +48,14 @@ A high-performance, full-stack developer portfolio featuring a custom-built Cont
 ## ⚙️ Local Setup
 
 ### Prerequisites
+
 - Node.js (v18+)
 - A Cloudinary Account (Free)
 - A Turso Account (Free)
 - A Resend Account (Free)
 
 ### 1. Clone & Install
+
 ```bash
 git clone https://github.com/your-username/your-repo.git
 cd Developer_Portfolio
@@ -59,6 +63,7 @@ npm run install:all
 ```
 
 ### 2. Environment Variables
+
 Create a `.env` file in the `server/` directory:
 
 ```env
@@ -84,13 +89,16 @@ RESEND_API_KEY=re_your_key
 ```
 
 ### 3. Initialize Database
+
 ```bash
 cd server
 npm run seed
 ```
 
 ### 4. Run Development Servers
+
 From the root directory:
+
 ```bash
 npm run dev
 ```
@@ -100,15 +108,18 @@ npm run dev
 ## ☁️ Deployment (Vercel)
 
 ### 1. Repository Setup
+
 Push your code to a GitHub/GitLab repository.
 
 ### 2. Vercel Configuration
+
 1. Import the project into Vercel.
 2. Ensure the **Root Directory** is set to the project root.
 3. Add all environment variables from your `server/.env` to the Vercel Dashboard.
 4. Add `VITE_API_URL` and set it to an empty string `""` (this ensures the frontend uses relative API calls).
 
 ### 3. Build Settings
+
 Vercel should automatically detect the settings from `vercel.json` and the root `package.json`.
 
 ---
@@ -116,6 +127,7 @@ Vercel should automatically detect the settings from `vercel.json` and the root 
 ## 🔐 Security Settings
 
 The portfolio includes a **Security Tab** in the Admin Dashboard. This allows you to:
+
 1. Change your Admin Email.
 2. Update your Password.
 
@@ -126,14 +138,9 @@ The credentials are stored in the `users` table in your Turso database, making t
 ## 🤝 Contributing
 
 Contributions are welcome! If you'd like to improve the UI or add features:
+
 1. Fork the repository.
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`).
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
 4. Push to the branch (`git push origin feature/AmazingFeature`).
 5. Open a Pull Request.
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
