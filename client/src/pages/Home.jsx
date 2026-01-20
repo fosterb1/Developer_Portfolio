@@ -18,7 +18,7 @@ const Home = () => {
         setProjects(data);
       } catch (err) {
         console.error('Failed to fetch projects:', err);
-        setError('Failed to load projects');
+        setError(err.message || 'Failed to load projects');
       } finally {
         setLoading(false);
       }

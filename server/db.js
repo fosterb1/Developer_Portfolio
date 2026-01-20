@@ -4,6 +4,10 @@ const path = require("path");
 
 dotenv.config({ path: path.join(__dirname, ".env") });
 
+if (process.env.NODE_ENV === 'production' && !process.env.TURSO_DATABASE_URL) {
+  console.warn("⚠️  WARNING: Running in production without TURSO_DATABASE_URL. The app is falling back to a local 'file:./data/portfolio.db' database, which WILL FAIL or be reset on serverless platforms like Vercel. Please configure TURSO_DATABASE_URL.");
+}
+
 const url = (process.env.TURSO_DATABASE_URL || "file:./data/portfolio.db").trim();
 const authToken = (process.env.TURSO_AUTH_TOKEN || "").trim();
 
