@@ -622,3 +622,121 @@ form.contact-form,
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Contact form: compact, aligned card rather than a stretched empty panel. */
+.contact-content {
+  align-items: start;
+}
+
+.contact-form.contact-panel {
+  align-self: start;
+  width: 100%;
+  height: max-content;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border-radius: 26px;
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(127, 145, 255, 0.1), transparent 55%),
+    linear-gradient(155deg, rgba(20, 27, 43, 0.86), rgba(12, 17, 29, 0.78));
+  gap: 1.1rem;
+}
+
+.contact-form-intro {
+  margin-bottom: 0.25rem;
+}
+
+.contact-form-eyebrow {
+  margin: 0 0 0.55rem;
+  color: #aab7ff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.contact-form-intro h3 {
+  margin: 0;
+  color: #f2f4ff;
+  font-size: clamp(1.45rem, 3vw, 1.8rem);
+  letter-spacing: -0.045em;
+}
+
+.contact-form-intro > p:last-child {
+  margin: 0.55rem 0 0;
+  color: #a9b3c8;
+  line-height: 1.65;
+}
+
+.contact-fields-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.contact-panel .form-group {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.contact-panel .form-group label {
+  color: #d7def1;
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+.contact-panel .form-group input,
+.contact-panel .form-group textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 0.9rem 1rem;
+  border-radius: 13px;
+  background: rgba(7, 10, 18, 0.48);
+}
+
+.contact-panel .form-group input {
+  min-height: 52px;
+}
+
+.contact-panel .form-group textarea {
+  min-height: 132px;
+  resize: vertical;
+}
+
+.contact-form-status {
+  padding: 0.85rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  font-size: 0.92rem;
+}
+
+.contact-form-status.success {
+  color: #b8f4d0;
+  border-color: rgba(86, 211, 145, 0.2);
+  background: rgba(25, 107, 67, 0.2);
+}
+
+.contact-form-status.error {
+  color: #ffbdc4;
+  border-color: rgba(255, 129, 145, 0.22);
+  background: rgba(133, 39, 55, 0.2);
+}
+
+.contact-submit {
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  width: auto !important;
+  min-width: 180px;
+}
+
+@media (max-width: 640px) {
+  .contact-panel .contact-fields-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-panel .contact-submit {
+    align-self: stretch;
+  }
+}
