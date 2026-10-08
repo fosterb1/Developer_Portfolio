@@ -101,6 +101,20 @@ app.get("/api/health", (_req, res) => {
 
 // --- PROFILE ENDPOINTS ---
 
+app.post("/api/profile/video-signature", requireAuth, (req, res) => {
+  const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
+  const apiKey = process.env.CLOUDINARY_API_KEY;
+  const apiSecret = process.env.CLOUDINARY_API_SECRET;
+  if (!cloudName || !apiKey || !apiSecret) {
+    return res.status(503).json({ error: "Cloudinary video uploads are not configured" });
+  }
+
+  const timestamp = Math.round(Date.now() / 1000);
+  const folder = "portfolio";
+  const signature = cloudinary.utils.api_sign_request({ folder, timestamp }, apiSecret);
+  res.json({ cloudName, apiKey, timestamp, folder, signature });
+});
+
 app.get("/api/profile", async (_req, res) => {
   try {
     const profile = await getProfile();

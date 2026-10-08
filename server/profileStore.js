@@ -6,6 +6,7 @@ const mapProfile = (row) => {
     name: row.name || "",
     title: row.title || "",
     heroBio: row.hero_bio || "",
+    heroVideoUrl: row.hero_video_url || "",
     aboutBio: row.about_bio || "",
     profileImage: row.profile_image || "",
     resumeUrl: row.resume_url || "",
@@ -34,11 +35,11 @@ const updateProfile = async (data) => {
 
   const sql = `
     INSERT OR REPLACE INTO profile (
-      id, name, title, hero_bio, about_bio, profile_image, resume_url, 
+      id, name, title, hero_bio, hero_video_url, about_bio, profile_image, resume_url,
       email, linkedin, github, twitter, facebook, 
       experience_years, education_summary, updated_at
     ) VALUES (
-      1, @name, @title, @heroBio, @aboutBio, @profileImage, @resumeUrl,
+      1, @name, @title, @heroBio, @heroVideoUrl, @aboutBio, @profileImage, @resumeUrl,
       @email, @linkedin, @github, @twitter, @facebook,
       @experienceYears, @educationSummary, CURRENT_TIMESTAMP
     )
@@ -50,6 +51,7 @@ const updateProfile = async (data) => {
       name: merged.name,
       title: merged.title,
       heroBio: merged.heroBio,
+      heroVideoUrl: merged.heroVideoUrl || "",
       aboutBio: merged.aboutBio,
       profileImage: merged.profileImage,
       resumeUrl: merged.resumeUrl,

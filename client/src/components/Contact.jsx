@@ -77,50 +77,60 @@ const Contact = () => {
             )}
           </div>
           
-          <form className="contact-form" onSubmit={handleSubmit}>
+          <form className="contact-form contact-panel" onSubmit={handleSubmit}>
+            <div className="contact-form-intro">
+              <p className="contact-form-eyebrow">A note away</p>
+              <h3>Let’s make something great.</h3>
+              <p>Share a little about what you’re working on, and I’ll get back to you soon.</p>
+            </div>
             {status.message && (
-              <div style={{ 
-                padding: '1rem', 
-                borderRadius: '8px', 
-                marginBottom: '1rem', 
-                backgroundColor: status.type === 'success' ? '#dcfce7' : '#fee2e2',
-                color: status.type === 'success' ? '#15803d' : '#b91c1c'
-              }}>
+              <div className={`contact-form-status ${status.type}`} role="status">
                 {status.message}
               </div>
             )}
-            <div className="form-group">
-              <input 
-                name="name"
-                type="text" 
-                placeholder="Your Name" 
-                required 
-                value={formData.name}
-                onChange={handleChange}
-              />
+            <div className="contact-fields-grid">
+              <div className="form-group">
+                <label htmlFor="contact-name">Name</label>
+                <input
+                  id="contact-name"
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  placeholder="Your name"
+                  required
+                  value={formData.name}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="contact-email">Email</label>
+                <input
+                  id="contact-email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  placeholder="you@example.com"
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+              </div>
             </div>
             <div className="form-group">
-              <input 
-                name="email"
-                type="email" 
-                placeholder="Your Email" 
-                required 
-                value={formData.email}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="form-group">
-              <textarea 
+              <label htmlFor="contact-message">What are you thinking about?</label>
+              <textarea
+                id="contact-message"
                 name="message"
-                placeholder="Your Message" 
-                rows="5" 
+                placeholder="A project, an opportunity, or just a hello…"
+                rows={4}
                 required
                 value={formData.message}
                 onChange={handleChange}
-              ></textarea>
+              />
             </div>
-            <button type="submit" className="btn btn-primary" disabled={loading}>
-              <i className="fas fa-paper-plane"></i> {loading ? 'Sending...' : 'Send Message'}
+            <button type="submit" className="btn btn-primary contact-submit" disabled={loading}>
+              <i className="fas fa-paper-plane" aria-hidden="true"></i>
+              {loading ? "Sending…" : "Send message"}
             </button>
           </form>
         </div>
