@@ -8,7 +8,6 @@ const DEFAULT_HERO_VIDEO_POSTER = 'https://cdn.pixabay.com/video/2022/12/28/1445
 const Hero = () => {
   const { profile } = useProfile();
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  const [videoFailed, setVideoFailed] = useState(false);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -19,7 +18,6 @@ const Hero = () => {
   }, []);
 
   const videoUrl = profile?.heroVideoUrl || DEFAULT_HERO_VIDEO_URL;
-  useEffect(() => setVideoFailed(false), [videoUrl]);
 
   if (!profile) return null;
 
@@ -35,7 +33,7 @@ const Hero = () => {
 
   return (
     <section id="home" className="hero-section">
-      {!prefersReducedMotion && !videoFailed && (
+      {!prefersReducedMotion && (
         <div className="hero-video-layer" aria-hidden="true">
           <video
             key={videoUrl}
@@ -45,7 +43,6 @@ const Hero = () => {
             playsInline
             preload="metadata"
             poster={DEFAULT_HERO_VIDEO_POSTER}
-            onError={() => setVideoFailed(true)}
             tabIndex={-1}
             aria-hidden="true"
           >
