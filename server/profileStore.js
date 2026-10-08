@@ -35,7 +35,7 @@ const updateProfile = async (data) => {
 
   const sql = `
     INSERT OR REPLACE INTO profile (
-      id, name, title, hero_bio, hero_video_url, about_bio, profile_image, resume_url, 
+      id, name, title, hero_bio, hero_video_url, about_bio, profile_image, resume_url,
       email, linkedin, github, twitter, facebook, 
       experience_years, education_summary, updated_at
     ) VALUES (
