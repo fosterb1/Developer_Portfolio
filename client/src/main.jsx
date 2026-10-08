@@ -5,6 +5,7 @@ import App from "./App";
 import { AuthProvider } from "./state/AuthContext";
 import { ProfileProvider } from "./state/ProfileContext";
 import "./index.css";
+import "./theme.css";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

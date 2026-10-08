@@ -58,9 +58,19 @@ const initSchema = async () => {
       facebook TEXT,
       experience_years TEXT,
       education_summary TEXT,
+      hero_video_url TEXT,
       updated_at TEXT DEFAULT CURRENT_TIMESTAMP
     )
   `);
+
+  const profileColumns = await client.execute("PRAGMA table_info(profile)");
+  if (!profileColumns.rows.some((column) => column.name === "hero_video_url")) {
+    try {
+      await client.execute("ALTER TABLE profile ADD COLUMN hero_video_url TEXT");
+    } catch (error) {
+      if (!String(error.message).toLowerCase().includes("duplicate column")) throw error;
+    }
+  }
 
   await client.execute(`
     CREATE TABLE IF NOT EXISTS skills (
