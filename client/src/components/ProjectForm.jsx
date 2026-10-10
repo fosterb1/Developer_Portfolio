@@ -1,218 +1,117 @@
-import React, { useEffect, useState } from "react";
-import { API_BASE } from "../services/api";
+import React, { useState } from 'react';
+import { API_BASE } from '../services/api';
 
-const normalizeStack = (value) =>
-  value
-    .split(",")
-    .map((v) => v.trim())
-    .filter(Boolean);
+const normalizeStack = (value) => value.split(',').map((item) => item.trim()).filter(Boolean);
 
-export default function ProjectForm({
-  initialProject,
-  onSubmit,
-  submitLabel = "Save Project",
-  loading,
-  onCancel
-}) {
-  const [title, setTitle] = useState("");
-  const [shortDescription, setShortDescription] = useState("");
-  const [fullDescription, setFullDescription] = useState("");
-  const [techStackInput, setTechStackInput] = useState("");
-  const [repoUrl, setRepoUrl] = useState("");
-  const [liveUrl, setLiveUrl] = useState("");
-  const [published, setPublished] = useState(true);
+export default function ProjectForm({ initialProject, onSubmit, submitLabel = 'Save project', loading = false, onCancel }) {
+  const [title, setTitle] = useState(initialProject?.title || '');
+  const [shortDescription, setShortDescription] = useState(initialProject?.shortDescription || '');
+  const [fullDescription, setFullDescription] = useState(initialProject?.fullDescription || '');
+  const [techStackInput, setTechStackInput] = useState(initialProject?.techStack?.join(', ') || '');
+  const [repoUrl, setRepoUrl] = useState(initialProject?.repoUrl || '');
+  const [liveUrl, setLiveUrl] = useState(initialProject?.liveUrl || '');
+  const [published, setPublished] = useState(initialProject ? Boolean(initialProject.published) : true);
   const [newImages, setNewImages] = useState([]);
-  const [keptImages, setKeptImages] = useState([]);
-
-  useEffect(() => {
-    if (initialProject) {
-      setTitle(initialProject.title || "");
-      setShortDescription(initialProject.shortDescription || "");
-      setFullDescription(initialProject.fullDescription || "");
-      setTechStackInput(initialProject.techStack?.join(", ") || "");
-      setRepoUrl(initialProject.repoUrl || "");
-      setLiveUrl(initialProject.liveUrl || "");
-      setPublished(Boolean(initialProject.published));
-      setKeptImages(initialProject.images || []);
-    } else {
-        // Reset for new project
-        setTitle("");
-        setShortDescription("");
-        setFullDescription("");
-        setTechStackInput("");
-        setRepoUrl("");
-        setLiveUrl("");
-        setPublished(true);
-        setKeptImages([]);
-        setNewImages([]);
-    }
-  }, [initialProject]);
-
-  const handleFileChange = (event) => {
-    setNewImages(Array.from(event.target.files || []));
-  };
-
-  const toggleImage = (img) => {
-    setKeptImages((prev) =>
-      prev.includes(img) ? prev.filter((i) => i !== img) : [...prev, img]
-    );
-  };
+  const [keptImages, setKeptImages] = useState(initialProject?.images || []);
+  const [formError, setFormError] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setFormError('');
     const formData = new FormData();
-    formData.append("title", title);
-    formData.append("shortDescription", shortDescription);
-    formData.append("fullDescription", fullDescription);
-    formData.append(
-      "techStack",
-      JSON.stringify(normalizeStack(techStackInput))
-    );
-    formData.append("repoUrl", repoUrl);
-    formData.append("liveUrl", liveUrl);
-    formData.append("published", String(published));
-    formData.append("existingImages", JSON.stringify(keptImages));
-    newImages.forEach((file) => formData.append("images", file));
-    await onSubmit(formData);
-    // Only reset if it's a new project (initialProject is null) to avoid clearing while editing on error
-    if (!initialProject) {
-        setNewImages([]);
+    formData.append('title', title.trim());
+    formData.append('shortDescription', shortDescription.trim());
+    formData.append('fullDescription', fullDescription.trim());
+    formData.append('techStack', JSON.stringify(normalizeStack(techStackInput)));
+    formData.append('repoUrl', repoUrl.trim());
+    formData.append('liveUrl', liveUrl.trim());
+    formData.append('published', String(published));
+    formData.append('existingImages', JSON.stringify(keptImages));
+    newImages.forEach((file) => formData.append('images', file));
+
+    try {
+      await onSubmit(formData);
+      if (!initialProject) setNewImages([]);
+    } catch (submitError) {
+      setFormError(submitError.message || 'Could not save this project. Please try again.');
     }
   };
 
   return (
-    <form className="contact-form" onSubmit={handleSubmit} style={{ backgroundColor: 'white', padding: '2rem', borderRadius: '12px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}>
-      <div className="form-group">
-        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Title</label>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
+    <form className="cms-form cms-panel cms-project-form" onSubmit={handleSubmit} aria-busy={loading}>
+      <div className="cms-form-intro">
+        <p className="cms-eyebrow">{initialProject ? 'Update the details' : 'Add something you built'}</p>
+        <h3>{initialProject ? 'Project details' : 'New project'}</h3>
       </div>
+      {formError && <div className="cms-alert cms-alert--error" role="alert">{formError}</div>}
 
-      <div className="form-group">
-        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Tech Stack (comma separated)</label>
-        <input
-          type="text"
-          value={techStackInput}
-          onChange={(e) => setTechStackInput(e.target.value)}
-          placeholder="React, Node.js, PostgreSQL"
-        />
-      </div>
-
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
-        <div className="form-group">
-          <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>GitHub Link</label>
-          <input
-            type="text"
-            value={repoUrl}
-            onChange={(e) => setRepoUrl(e.target.value)}
-          />
+      <div className="cms-form-grid">
+        <div className="form-group cms-field">
+          <label htmlFor="project-title">Project title</label>
+          <input id="project-title" name="title" value={title} onChange={(event) => setTitle(event.target.value)} required />
         </div>
-        <div className="form-group">
-          <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Live Demo Link</label>
-          <input
-            type="text"
-            value={liveUrl}
-            onChange={(e) => setLiveUrl(e.target.value)}
-          />
+        <div className="form-group cms-field">
+          <label htmlFor="project-stack">Tech stack <span className="cms-field-note">(comma separated)</span></label>
+          <input id="project-stack" value={techStackInput} onChange={(event) => setTechStackInput(event.target.value)} placeholder="React, Node.js, PostgreSQL" />
+        </div>
+        <div className="form-group cms-field">
+          <label htmlFor="project-repo">GitHub URL</label>
+          <input id="project-repo" type="url" inputMode="url" value={repoUrl} onChange={(event) => setRepoUrl(event.target.value)} placeholder="https://github.com/…" />
+        </div>
+        <div className="form-group cms-field">
+          <label htmlFor="project-live">Live demo URL</label>
+          <input id="project-live" type="url" inputMode="url" value={liveUrl} onChange={(event) => setLiveUrl(event.target.value)} placeholder="https://…" />
         </div>
       </div>
 
-      <div className="form-group">
-        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Short Description</label>
-        <textarea
-          rows={3}
-          value={shortDescription}
-          onChange={(e) => setShortDescription(e.target.value)}
-          placeholder="Concise pitch"
-        />
+      <div className="form-group cms-field">
+        <label htmlFor="project-short-description">Short description</label>
+        <textarea id="project-short-description" rows={3} value={shortDescription} onChange={(event) => setShortDescription(event.target.value)} placeholder="A concise overview of the project." />
+      </div>
+      <div className="form-group cms-field">
+        <label htmlFor="project-full-description">Full description <span className="cms-field-note">(Markdown supported)</span></label>
+        <textarea id="project-full-description" rows={7} value={fullDescription} onChange={(event) => setFullDescription(event.target.value)} placeholder="Describe the problem, your approach, and the outcome." />
       </div>
 
-      <div className="form-group">
-        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Full Description (Markdown)</label>
-        <textarea
-          rows={8}
-          value={fullDescription}
-          onChange={(e) => setFullDescription(e.target.value)}
-          placeholder="Add details, challenges, outcomes..."
-        />
-      </div>
-
-      <div className="form-group">
-        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Images</label>
-        <input
-          type="file"
-          accept="image/*"
-          multiple
-          onChange={handleFileChange}
-          style={{ padding: '0.5rem' }}
-        />
-        {newImages.length > 0 && (
-          <p style={{ fontSize: '0.9rem', color: 'var(--primary-color)', marginTop: '0.5rem' }}>Queued: {newImages.length} file(s)</p>
-        )}
-      </div>
-
-      <div className="form-group" style={{ display: "flex", gap: 10, alignItems: "center" }}>
-        <input
-          type="checkbox"
-          checked={published}
-          onChange={(e) => setPublished(e.target.checked)}
-          style={{ width: 'auto' }}
-        />
-        <label style={{ cursor: 'pointer' }}>Published (Visible to visitors)</label>
+      <div className="form-group cms-field">
+        <label htmlFor="project-images">Project images</label>
+        <input id="project-images" type="file" accept="image/*" multiple onChange={(event) => setNewImages(Array.from(event.target.files || []))} />
+        <p className="cms-field-note">{newImages.length ? newImages.length + ' image(s) ready to upload.' : 'Choose one or more images to add to this project.'}</p>
       </div>
 
       {initialProject?.images?.length > 0 && (
-        <div className="form-group">
-          <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Existing Images</label>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
-            {initialProject.images.map((img) => (
-              <div 
-                key={img} 
-                onClick={() => toggleImage(img)}
-                style={{ 
-                    position: 'relative', 
-                    cursor: 'pointer', 
-                    border: keptImages.includes(img) ? '2px solid var(--success-color)' : '2px solid #ef4444',
-                    borderRadius: '8px',
-                    overflow: 'hidden',
-                    opacity: keptImages.includes(img) ? 1 : 0.6
-                }}
-              >
-                <img 
-                    src={img.startsWith('http') ? img : `${API_BASE}${img}`} 
-                    alt="preview" 
-                    style={{ height: '60px', width: 'auto', display: 'block' }} 
-                />
-                <div style={{ 
-                    position: 'absolute', 
-                    bottom: 0, 
-                    left: 0, 
-                    right: 0, 
-                    background: 'rgba(0,0,0,0.7)', 
-                    color: 'white', 
-                    fontSize: '0.7rem', 
-                    textAlign: 'center' 
-                }}>
-                    {keptImages.includes(img) ? 'Keep' : 'Drop'}
-                </div>
-              </div>
-            ))}
+        <fieldset className="cms-image-set">
+          <legend>Existing images</legend>
+          <p className="cms-field-note">Select the images to keep.</p>
+          <div className="cms-image-grid">
+            {initialProject.images.map((image) => {
+              const keep = keptImages.includes(image);
+              return (
+                <button
+                  className={'cms-image-toggle' + (keep ? ' is-kept' : ' is-removed')}
+                  type="button"
+                  key={image}
+                  aria-pressed={keep}
+                  onClick={() => setKeptImages((current) => current.includes(image) ? current.filter((item) => item !== image) : [...current, image])}
+                >
+                  <img src={image.startsWith('http') ? image : API_BASE + image} alt="" />
+                  <span>{keep ? 'Keeping' : 'Removed'}</span>
+                </button>
+              );
+            })}
           </div>
-        </div>
+        </fieldset>
       )}
 
-      <div style={{ display: "flex", gap: 12, justifyContent: "flex-end", marginTop: '1rem' }}>
-        {onCancel && (
-            <button type="button" className="btn btn-secondary" onClick={onCancel}>
-                Cancel
-            </button>
-        )}
+      <label className="cms-checkbox-row" htmlFor="project-published">
+        <input id="project-published" type="checkbox" checked={published} onChange={(event) => setPublished(event.target.checked)} />
+        <span><strong>Publish project</strong><small>Visible to visitors on your portfolio.</small></span>
+      </label>
+
+      <div className="cms-form-actions">
+        {onCancel && <button className="btn btn-secondary" type="button" onClick={onCancel} disabled={loading}>Cancel</button>}
         <button className="btn btn-primary" type="submit" disabled={loading}>
-          {loading ? "Saving..." : submitLabel}
+          {loading ? 'Saving…' : submitLabel}
         </button>
       </div>
     </form>

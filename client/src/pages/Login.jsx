@@ -2,65 +2,51 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../state/AuthContext';
 
-const Login = () => {
+export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     setError('');
+    setLoading(true);
     try {
-      await login(email, password);
+      await login(email.trim(), password);
       navigate('/admin');
-    } catch (err) {
-      setError(err.message || 'Login failed');
+    } catch (loginError) {
+      setError(loginError.message || 'Login failed. Check your details and try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="container" style={{ paddingTop: '120px', minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div className="login-card" style={{ width: '100%', maxWidth: '400px', padding: '2rem', backgroundColor: 'white', borderRadius: 'var(--border-radius)', boxShadow: 'var(--box-shadow)' }}>
-        <h2 className="section-title text-center" style={{ fontSize: '2rem', marginBottom: '2rem' }}>Admin Login</h2>
-        
-        {error && (
-          <div style={{ backgroundColor: '#fee2e2', color: '#ef4444', padding: '0.75rem', borderRadius: '0.5rem', marginBottom: '1.5rem', textAlign: 'center' }}>
-            {error}
+    <main className="container cms-auth-shell">
+      <section className="cms-panel cms-auth-card">
+        <div className="cms-form-intro">
+          <p className="cms-eyebrow">Portfolio studio</p>
+          <h1 className="cms-title">Welcome back</h1>
+          <p>Sign in to manage your portfolio.</p>
+        </div>
+        {error && <div className="cms-alert cms-alert--error" role="alert">{error}</div>}
+        <form className="cms-form cms-form--compact" onSubmit={handleSubmit} aria-busy={loading}>
+          <div className="form-group cms-field">
+            <label htmlFor="login-email">Email</label>
+            <input id="login-email" type="email" autoComplete="username" value={email} onChange={(event) => setEmail(event.target.value)} required />
           </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="contact-form">
-          <div className="form-group">
-            <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Email</label>
-            <input 
-              type="email" 
-              value={email} 
-              onChange={(e) => setEmail(e.target.value)} 
-              required 
-              style={{ width: '100%' }}
-            />
+          <div className="form-group cms-field">
+            <label htmlFor="login-password">Password</label>
+            <input id="login-password" type="password" autoComplete="current-password" value={password} onChange={(event) => setPassword(event.target.value)} required />
           </div>
-          
-          <div className="form-group">
-            <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Password</label>
-            <input 
-              type="password" 
-              value={password} 
-              onChange={(e) => setPassword(e.target.value)} 
-              required 
-              style={{ width: '100%' }}
-            />
-          </div>
-          
-          <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }}>
-            Sign In
+          <button className="btn btn-primary" type="submit" disabled={loading}>
+            {loading ? 'Signing in…' : 'Sign in'}
           </button>
         </form>
-      </div>
-    </div>
+      </section>
+    </main>
   );
-};
-
-export default Login;
+}
