@@ -1,43 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { API_BASE } from '../services/api';
 
 const normalizeStack = (value) => value.split(',').map((item) => item.trim()).filter(Boolean);
 
 export default function ProjectForm({ initialProject, onSubmit, submitLabel = 'Save project', loading = false, onCancel }) {
-  const [title, setTitle] = useState('');
-  const [shortDescription, setShortDescription] = useState('');
-  const [fullDescription, setFullDescription] = useState('');
-  const [techStackInput, setTechStackInput] = useState('');
-  const [repoUrl, setRepoUrl] = useState('');
-  const [liveUrl, setLiveUrl] = useState('');
-  const [published, setPublished] = useState(true);
+  const [title, setTitle] = useState(initialProject?.title || '');
+  const [shortDescription, setShortDescription] = useState(initialProject?.shortDescription || '');
+  const [fullDescription, setFullDescription] = useState(initialProject?.fullDescription || '');
+  const [techStackInput, setTechStackInput] = useState(initialProject?.techStack?.join(', ') || '');
+  const [repoUrl, setRepoUrl] = useState(initialProject?.repoUrl || '');
+  const [liveUrl, setLiveUrl] = useState(initialProject?.liveUrl || '');
+  const [published, setPublished] = useState(initialProject ? Boolean(initialProject.published) : true);
   const [newImages, setNewImages] = useState([]);
-  const [keptImages, setKeptImages] = useState([]);
+  const [keptImages, setKeptImages] = useState(initialProject?.images || []);
   const [formError, setFormError] = useState('');
-
-  useEffect(() => {
-    if (initialProject) {
-      setTitle(initialProject.title || '');
-      setShortDescription(initialProject.shortDescription || '');
-      setFullDescription(initialProject.fullDescription || '');
-      setTechStackInput(initialProject.techStack?.join(', ') || '');
-      setRepoUrl(initialProject.repoUrl || '');
-      setLiveUrl(initialProject.liveUrl || '');
-      setPublished(Boolean(initialProject.published));
-      setKeptImages(initialProject.images || []);
-    } else {
-      setTitle('');
-      setShortDescription('');
-      setFullDescription('');
-      setTechStackInput('');
-      setRepoUrl('');
-      setLiveUrl('');
-      setPublished(true);
-      setKeptImages([]);
-      setNewImages([]);
-    }
-    setFormError('');
-  }, [initialProject]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
