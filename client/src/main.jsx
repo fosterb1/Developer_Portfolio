@@ -6,6 +6,7 @@ import { AuthProvider } from "./state/AuthContext";
 import { ProfileProvider } from "./state/ProfileContext";
 import "./index.css";
 import "./theme.css";
+import "./cms.css";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

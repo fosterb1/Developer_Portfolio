@@ -23,6 +23,7 @@ export default function ProfileForm({ initialProfile, onSubmit, loading }) {
   const [newHeroVideo, setNewHeroVideo] = useState(null);
   const [videoPreviewUrl, setVideoPreviewUrl] = useState('');
   const [videoError, setVideoError] = useState('');
+  const [formStatus, setFormStatus] = useState('');
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
@@ -102,6 +103,7 @@ export default function ProfileForm({ initialProfile, onSubmit, loading }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setVideoError('');
+    setFormStatus('');
     setSaving(true);
 
     try {
@@ -132,6 +134,7 @@ export default function ProfileForm({ initialProfile, onSubmit, loading }) {
 
       await onSubmit(formData);
       setNewHeroVideo(null);
+      setFormStatus('Profile saved.');
     } catch (error) {
       setVideoError(error.message || 'Unable to save the hero video.');
     } finally {
@@ -140,84 +143,84 @@ export default function ProfileForm({ initialProfile, onSubmit, loading }) {
   };
 
   return (
-    <form className="contact-form profile-form" onSubmit={handleSubmit}>
-      <h3 className="profile-form-heading">Personal Info</h3>
+    <form className="contact-form profile-form cms-form" onSubmit={handleSubmit}>
+      <h3 className="profile-form-heading cms-form-section-title">Personal Info</h3>
 
-      <div className="profile-form-grid">
+      <div className="profile-form-grid cms-form-grid">
         <div className="form-group">
-          <label>Full Name</label>
-          <input value={name} onChange={(event) => setName(event.target.value)} required />
+          <label htmlFor="profile-name">Full Name</label>
+          <input id="profile-name" value={name} onChange={(event) => setName(event.target.value)} required />
         </div>
         <div className="form-group">
-          <label>Job Title</label>
-          <input value={title} onChange={(event) => setTitle(event.target.value)} required />
+          <label htmlFor="profile-title">Job Title</label>
+          <input id="profile-title" value={title} onChange={(event) => setTitle(event.target.value)} required />
         </div>
       </div>
 
       <div className="form-group">
-        <label>Hero Bio (Short)</label>
-        <textarea rows={2} value={heroBio} onChange={(event) => setHeroBio(event.target.value)} />
+        <label htmlFor="profile-hero-bio">Hero Bio (Short)</label>
+        <textarea id="profile-hero-bio" rows={2} value={heroBio} onChange={(event) => setHeroBio(event.target.value)} />
       </div>
       <div className="form-group">
-        <label>About Bio (Long)</label>
-        <textarea rows={5} value={aboutBio} onChange={(event) => setAboutBio(event.target.value)} />
+        <label htmlFor="profile-about-bio">About Bio (Long)</label>
+        <textarea id="profile-about-bio" rows={5} value={aboutBio} onChange={(event) => setAboutBio(event.target.value)} />
       </div>
 
-      <h3 className="profile-form-heading">Stats &amp; Details</h3>
-      <div className="profile-form-grid">
+      <h3 className="profile-form-heading cms-form-section-title">Stats &amp; Details</h3>
+      <div className="profile-form-grid cms-form-grid">
         <div className="form-group">
-          <label>Experience (e.g. 1+ Year)</label>
-          <input value={experienceYears} onChange={(event) => setExperienceYears(event.target.value)} />
+          <label htmlFor="profile-experience">Experience (e.g. 1+ Year)</label>
+          <input id="profile-experience" value={experienceYears} onChange={(event) => setExperienceYears(event.target.value)} />
         </div>
         <div className="form-group">
-          <label>Education (Summary)</label>
-          <textarea rows={2} value={educationSummary} onChange={(event) => setEducationSummary(event.target.value)} />
-        </div>
-      </div>
-
-      <h3 className="profile-form-heading">Social Links</h3>
-      <div className="profile-form-grid">
-        <div className="form-group">
-          <label>Email</label>
-          <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} />
-        </div>
-        <div className="form-group">
-          <label>LinkedIn URL</label>
-          <input value={linkedin} onChange={(event) => setLinkedin(event.target.value)} />
-        </div>
-        <div className="form-group">
-          <label>GitHub URL</label>
-          <input value={github} onChange={(event) => setGithub(event.target.value)} />
-        </div>
-        <div className="form-group">
-          <label>Twitter URL</label>
-          <input value={twitter} onChange={(event) => setTwitter(event.target.value)} />
-        </div>
-        <div className="form-group">
-          <label>Facebook URL</label>
-          <input value={facebook} onChange={(event) => setFacebook(event.target.value)} />
+          <label htmlFor="profile-education">Education (Summary)</label>
+          <textarea id="profile-education" rows={2} value={educationSummary} onChange={(event) => setEducationSummary(event.target.value)} />
         </div>
       </div>
 
-      <h3 className="profile-form-heading">Media</h3>
-      <div className="profile-form-grid profile-media-grid">
+      <h3 className="profile-form-heading cms-form-section-title">Social Links</h3>
+      <div className="profile-form-grid cms-form-grid">
         <div className="form-group">
-          <label>Profile Image</label>
+          <label htmlFor="profile-email">Email</label>
+          <input id="profile-email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} />
+        </div>
+        <div className="form-group">
+          <label htmlFor="profile-linkedin">LinkedIn URL</label>
+          <input id="profile-linkedin" value={linkedin} onChange={(event) => setLinkedin(event.target.value)} />
+        </div>
+        <div className="form-group">
+          <label htmlFor="profile-github">GitHub URL</label>
+          <input id="profile-github" value={github} onChange={(event) => setGithub(event.target.value)} />
+        </div>
+        <div className="form-group">
+          <label htmlFor="profile-twitter">Twitter URL</label>
+          <input id="profile-twitter" value={twitter} onChange={(event) => setTwitter(event.target.value)} />
+        </div>
+        <div className="form-group">
+          <label htmlFor="profile-facebook">Facebook URL</label>
+          <input id="profile-facebook" value={facebook} onChange={(event) => setFacebook(event.target.value)} />
+        </div>
+      </div>
+
+      <h3 className="profile-form-heading cms-form-section-title">Media</h3>
+      <div className="profile-form-grid profile-media-grid cms-form-grid">
+        <div className="form-group">
+          <label htmlFor="profile-image">Profile Image</label>
           <div className="profile-media-control">
             {initialProfile?.profileImage && <img src={getImageUrl(initialProfile.profileImage)} alt="Current profile" className="profile-image-preview" />}
-            <input type="file" accept="image/*" onChange={(event) => setNewProfileImage(event.target.files?.[0] || null)} />
+            <input id="profile-image" type="file" accept="image/*" onChange={(event) => setNewProfileImage(event.target.files?.[0] || null)} />
           </div>
         </div>
         <div className="form-group">
-          <label>Resume (PDF)</label>
+          <label htmlFor="profile-resume">Resume (PDF)</label>
           <div className="profile-media-control">
             {initialProfile?.resumeUrl && <a href={getImageUrl(initialProfile.resumeUrl)} target="_blank" rel="noreferrer" className="btn btn-secondary profile-current-link">View Current</a>}
-            <input type="file" accept=".pdf" onChange={(event) => setNewResume(event.target.files?.[0] || null)} />
+            <input id="profile-resume" type="file" accept=".pdf" onChange={(event) => setNewResume(event.target.files?.[0] || null)} />
           </div>
         </div>
       </div>
 
-      <h3 className="profile-form-heading">Hero Background Video</h3>
+      <h3 className="profile-form-heading cms-form-section-title">Hero Background Video</h3>
       <p className="profile-form-help">Paste a direct public HTTPS video URL, or upload an MP4/WebM file (up to 50 MB). A new upload takes priority over the URL. Leave both blank to use the built-in ambient video.</p>
       <div className="form-group">
         <label htmlFor="heroVideoUrl">Video URL</label>
@@ -244,9 +247,10 @@ export default function ProfileForm({ initialProfile, onSubmit, loading }) {
           )}
         </div>
       </div>
-      {videoError && <p className="profile-video-error" role="alert">{videoError}</p>}
+      {formStatus && <p className="cms-alert cms-alert--success" role="status">{formStatus}</p>}
+      {videoError && <p className="profile-video-error cms-alert cms-alert--error" role="alert">{videoError}</p>}
 
-      <div className="profile-form-actions">
+      <div className="profile-form-actions cms-form-actions">
         <button className="btn btn-primary" type="submit" disabled={loading || saving}>
           {saving ? (newHeroVideo ? 'Uploading & saving...' : 'Saving...') : loading ? 'Saving...' : 'Save Profile Changes'}
         </button>
